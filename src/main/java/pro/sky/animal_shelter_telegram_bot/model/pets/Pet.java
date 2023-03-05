@@ -14,6 +14,7 @@ public class Pet {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
     private String nameOfPet;

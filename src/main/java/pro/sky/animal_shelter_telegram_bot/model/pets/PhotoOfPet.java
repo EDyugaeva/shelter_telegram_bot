@@ -10,6 +10,7 @@ public class PhotoOfPet {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
     private String filePath;
