@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -71,13 +70,9 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @GetMapping("{id}")
-    public ResponseEntity<PetOwner> findPetOwner(@Parameter(description = "Pet owner id", example = "1") @PathVariable Long id) {
+    public PetOwner findPetOwner(@Parameter(description = "Pet owner id", example = "1") @PathVariable Long id) {
         logger.info("Call findPetOwner in PetOwnerController");
-        PetOwner petOwner = petOwnerService.findPetOwner(id);
-        if (petOwner == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(petOwner);
+        return petOwnerService.findPetOwner(id);
     }
 
     @Operation(
@@ -132,13 +127,9 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @PutMapping
-    public ResponseEntity<PetOwner> editPetOwner(@RequestBody PetOwner petOwner) {
+    public PetOwner editPetOwner(@RequestBody PetOwner petOwner) {
         logger.info("Call editPetOwner in PetOwnerController");
-        PetOwner editPetOwner = petOwnerService.changePetOwner(petOwner);
-        if (editPetOwner == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(petOwner);
+        return petOwnerService.changePetOwner(petOwner);
     }
 
     @Operation(
@@ -162,12 +153,9 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @DeleteMapping("{id}")
-    public ResponseEntity<PetOwner> deletePetOwner(@PathVariable Long id) {
+    public PetOwner deletePetOwner(@PathVariable Long id) {
         logger.info("Call deletePetOwner in PetOwnerController");
-        if (petOwnerService.deletePetOwner(id) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(petOwnerService.deletePetOwner(id));
+        return petOwnerService.deletePetOwner(id);
     }
 
     @Operation(
@@ -192,10 +180,9 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @GetMapping(path = "/zero-probation")
-    public ResponseEntity<Collection<PetOwner>> findPetOwnerZeroProbation() {
+    public Collection<PetOwner> findPetOwnerZeroProbation() {
         logger.info("Call PetOwnerControllerZeroProbation in PetOwnerController");
-        Collection<PetOwner> petOwner = petOwnerService.getPetOwnerWithZeroDayOfProbation();
-        return ResponseEntity.ok(petOwner);
+        return petOwnerService.getPetOwnerWithZeroDayOfProbation();
     }
 
     @Operation(
@@ -221,15 +208,14 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @PutMapping("{id}/probation-days")
-    public ResponseEntity<PetOwner> changeDayOfProbationInPetOwner(
+    public PetOwner changeDayOfProbationInPetOwner(
             @PathVariable Long id,
             @Parameter(description = "Amount of extra day (could be negative)", example = "-2") @RequestParam("amount") Integer amountOfDays) {
         logger.info("Call changeDayOfProbationInPetOwner in PetOwnerController");
-        PetOwner petOwner = petOwnerService.setExtraDayOfProbation(id, amountOfDays);
-        return ResponseEntity.ok(petOwner);
+        return petOwnerService.setExtraDayOfProbation(id, amountOfDays);
     }
 
-    @Operation (
+    @Operation(
             summary = "Say, that probation is over",
             responses = {
                     @ApiResponse(
@@ -246,13 +232,12 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @PutMapping("{id}/probation-successfully")
-    public ResponseEntity<String> probationIsOver(@PathVariable Long id) {
+    public String probationIsOver(@PathVariable Long id) {
         logger.info("Call probationIsOver in PetOwnerController");
-        String message = petOwnerService.sayThatProbationIsOverSuccessfully(id);
-        return ResponseEntity.ok(message);
+        return petOwnerService.sayThatProbationIsOverSuccessfully(id);
     }
 
-    @Operation (
+    @Operation(
             summary = "Say, that probation is over",
             responses = {
                     @ApiResponse(
@@ -273,10 +258,9 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @PutMapping("{id}/probation-unsuccessfully")
-    public ResponseEntity<String> probationIsOverUnsuccessfully(@PathVariable Long id) {
+    public String probationIsOverUnsuccessfully(@PathVariable Long id) {
         logger.info("Call probationIsOverUnsuccessfully in PetOwnerController");
-        String message = petOwnerService.sayThatProbationIsOverNotSuccessfully(id);
-        return ResponseEntity.ok(message);
+        return petOwnerService.sayThatProbationIsOverNotSuccessfully(id);
     }
 
     @Operation(
@@ -293,8 +277,8 @@ public class PetOwnerController {
             tags = "Pet owners"
     )
     @GetMapping("/all")
-    public ResponseEntity<Collection<PetOwner>> findAllPetOwners() {
+    public Collection<PetOwner> findAllPetOwners() {
         logger.info("Call findAllPetOwners in PetOwnerController");
-        return ResponseEntity.ok(petOwnerService.getAllPetOwners());
+        return petOwnerService.getAllPetOwners();
     }
 }
