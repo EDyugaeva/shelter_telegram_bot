@@ -17,6 +17,7 @@ import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -97,7 +98,8 @@ public class PhotoOfPetServiceImpl implements PhotoOfPetService {
 
     @Override
     public PhotoOfPet findPhotoByReportId(Long reportId) {
-        return photoOfPetRepository.findPhotoOfPetByReportId(reportId).orElse(new PhotoOfPet());
+        return photoOfPetRepository.findPhotoOfPetByReportId(reportId).orElseThrow(() ->
+                new NoSuchElementException(String.format("Photo for report with id = %d is not exist", reportId)));
     }
 
     /**

@@ -10,6 +10,7 @@ public class Report {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
     private String dateOfReport;
     private String diet;

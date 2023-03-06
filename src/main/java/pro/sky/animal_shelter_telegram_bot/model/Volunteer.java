@@ -2,6 +2,7 @@ package pro.sky.animal_shelter_telegram_bot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ public class Volunteer {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
     private String firstName;

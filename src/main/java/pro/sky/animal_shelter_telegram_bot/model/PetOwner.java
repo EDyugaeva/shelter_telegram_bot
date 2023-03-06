@@ -13,6 +13,7 @@ public class PetOwner {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
     private String firstName;

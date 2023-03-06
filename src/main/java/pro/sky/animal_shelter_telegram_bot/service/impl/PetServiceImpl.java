@@ -1,21 +1,22 @@
 package pro.sky.animal_shelter_telegram_bot.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 import pro.sky.animal_shelter_telegram_bot.model.pets.Pet;
 import pro.sky.animal_shelter_telegram_bot.repository.PetRepository;
 import pro.sky.animal_shelter_telegram_bot.service.PetService;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Service for working with repository DogRepository
  */
 @Service
+@Slf4j
 public class PetServiceImpl implements PetService {
-
-    Logger logger = LoggerFactory.getLogger(PetServiceImpl.class);
 
     private final PetRepository petRepository;
 
@@ -26,40 +27,34 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet addPet(Pet pet) {
         Pet addingPet = petRepository.save(pet);
-        logger.info("Pet with id {} is saved", addingPet.getId());
+        log.info("Pet with id {} is saved", addingPet.getId());
         return addingPet;
     }
 
     public Pet deletePet(Long id) {
-        if (petRepository.findById(id).isEmpty()){
-            logger.info("Pet with id {} is not found", id);
-            return null;
-        }
-        Pet deletePet = petRepository.findById(id).get();
+        Pet deletePet = petRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet with id = %d is not found", id)));
         petRepository.deleteById(id);
-        logger.info("Pet with id {} is deleted", id);
+        log.info("Pet with id {} is deleted", id);
         return deletePet;
     }
 
     @Override
     public Pet findPet(Long id) {
-        if (petRepository.findById(id).isEmpty()){
-            logger.info("Pet with id {} is not found", id);
-            return null;
-        }
-        Pet findingPet = petRepository.findById(id).get();
-        logger.info("Pet with id {} is found", id);
+        Pet findingPet = petRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet with id = %d is not found", id)));
+        log.info("Pet with id {} is found", id);
         return findingPet;
     }
 
     @Override
     public Pet changePet(Pet pet) {
-        if (petRepository.findById(pet.getId()).isEmpty()){
-            logger.info("Pet with id {} is not found", pet.getId());
-            return null;
+        if (petRepository.findById(pet.getId()).isEmpty()) {
+            log.info("Pet with id {} is not found", pet.getId());
+            throw new NoSuchElementException(String.format("Pet with id = %d is not found", pet.getId()));
         }
         Pet changingPet = petRepository.save(pet);
-        logger.info("Pet with id {} is saved", pet);
+        log.info("Pet with id {} is saved", pet);
         return changingPet;
     }
 
@@ -70,8 +65,13 @@ public class PetServiceImpl implements PetService {
      */
     @Override
     public Collection<Pet> getAllPets() {
-        logger.info("Was invoked method for getAllPets");
-        return petRepository.findAll();
+        log.info("Was invoked method for getAllPets");
+        List<Pet> petList = petRepository.findAll();
+        if (petList.isEmpty()) {
+            log.error("Volunteer list is empty");
+            throw new NotFoundException("Volunteers are empty");
+        }
+        return petList;
     }
 
 }

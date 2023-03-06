@@ -1,14 +1,8 @@
 package pro.sky.animal_shelter_telegram_bot.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
-import pro.sky.animal_shelter_telegram_bot.model.PetOwner;
 import pro.sky.animal_shelter_telegram_bot.model.Report;
-import pro.sky.animal_shelter_telegram_bot.model.pets.Pet;
-import pro.sky.animal_shelter_telegram_bot.repository.PetOwnerRepository;
-import pro.sky.animal_shelter_telegram_bot.repository.PetRepository;
 import pro.sky.animal_shelter_telegram_bot.repository.ReportRepository;
 import pro.sky.animal_shelter_telegram_bot.service.ReportService;
 
@@ -16,67 +10,58 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 /**
  * Service for working with repository ReportRepository
  */
 @Service
+@Slf4j
 public class ReportServiceImpl implements ReportService {
 
-    Logger logger = LoggerFactory.getLogger(ReportServiceImpl.class);
 
     private final ReportRepository reportRepository;
 
-    private final PetOwnerRepository petOwnerRepository;
-
-    private final PetRepository petRepository;
 
 
-    public ReportServiceImpl(ReportRepository reportRepository, PetOwnerRepository petOwnerRepository, PetRepository petRepository) {
+    public ReportServiceImpl(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
-        this.petOwnerRepository = petOwnerRepository;
-        this.petRepository = petRepository;
     }
 
     @Override
     public Report addReport(Report report) {
         Report addingReport = reportRepository.save(report);
-        logger.info("Report with id {} is saved", addingReport);
+        log.info("Report with id {} is saved", addingReport);
         return addingReport;
     }
 
     @Override
     public Report deleteReport(Long id) {
-        if (reportRepository.findById(id).isEmpty()) {
-            logger.info("Report with id {} is not found", id);
-            return null;
-        }
-        Report deleteReport = reportRepository.findById(id).get();
+        Report deleteReport = reportRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException(String.format("Report with id = %d is not found", id)));
         reportRepository.deleteById(id);
-        logger.info("Report with id {} is deleted", id);
+        log.info("Report with id {} is deleted", id);
         return deleteReport;
     }
 
     @Override
     public Report findReport(Long id) {
-        if (reportRepository.findById(id).isEmpty()) {
-            logger.info("Report with id {} is not found", id);
-            return null;
-        }
-        Report report = reportRepository.findById(id).get();
-        logger.info("Report with id {} is found", id);
+        Report report = reportRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException(String.format("Report with id = %d is not found", id)));
+
+        log.info("Report with id {} is found", id);
         return report;
     }
 
     @Override
     public Report changeReport(Report report) {
         if (reportRepository.findById(report.getId()).isEmpty()) {
-            logger.info("Report with id {} is not found", report.getId());
-            return null;
+            log.info("Report with id {} is not found", report.getId());
+            throw new NoSuchElementException(String.format("Report with id = %d is not found", report.getId()));
         }
         Report changingReport = reportRepository.save(report);
-        logger.info("Report {} is saved", report);
+        log.info("Report {} is saved", report);
         return changingReport;
     }
 
@@ -90,7 +75,7 @@ public class ReportServiceImpl implements ReportService {
      */
     @Override
     public String[] setReportToDataBase(String text, Long chatId, String date) {
-        logger.info("Setting report to database");
+        log.info("Setting report to database");
 
         Report report = findReportByChatIdAndDate(chatId, date);
 
@@ -100,14 +85,14 @@ public class ReportServiceImpl implements ReportService {
             report.setHealth(parsingText[0]);
             report.setDiet(parsingText[1]);
             report.setChangeInBehavior(parsingText[2]);
-            logger.info("Отчет без ошибок запарсен. Состоит из частей: {}, {}, {}", parsingText[0], parsingText[1], parsingText[2]);
+            log.info("Отчет без ошибок запарсен. Состоит из частей: {}, {}, {}", parsingText[0], parsingText[1], parsingText[2]);
         } else {
-            logger.warn("Mistake in parsing");
+            log.warn("Mistake in parsing");
             throw new IllegalArgumentException("Mistake in report");
         }
 
         reportRepository.save(report);
-        logger.info("Отчет {} сохранен", report.getId());
+        log.info("Отчет {} сохранен", report.getId());
         return parsingText;
 
     }
@@ -119,22 +104,9 @@ public class ReportServiceImpl implements ReportService {
      */
     @Transactional
     public Report findReportByChatIdAndDate(Long chatId, String date) {
-        logger.info("Start finding report by chat id and date");
-        PetOwner petOwner = petOwnerRepository.findPetOwnerByChatId(chatId).orElse(new PetOwner());
-        Report report = reportRepository.findReportByDateOfReportAndPetOwner_ChatId(date, chatId).orElse(new Report());
-        if (report.getDateOfReport() == null || report.getPetOwner() == null) {
-            logger.info("report is null");
-            report.setDateOfReport(date);
-            report.setPetOwner(petOwner);
-            if (!petRepository.findPetByOwnerOfPet_Id(petOwner.getId()).isEmpty()) {
-                List<Pet> petCollection = (List<Pet>) petRepository.findPetByOwnerOfPet_Id(petOwner.getId());
-                report.setPet(petCollection.get(0));
-                logger.info("Pet with ID {} was added to Pet owner with ID {}", petCollection.get(0).getId(), petOwner.getId());
-            } else {
-                logger.info("Pet owner {} does not have pets", petOwner.getId());
-            }
-        }
-        return report;
+        log.info("Start finding report by chat id and date");
+        return reportRepository.findReportByDateOfReportAndPetOwner_ChatId(date, chatId).orElseThrow(() ->
+                new NoSuchElementException(String.format("Report with date = %s and chat id = %d is not found", date, chatId)));
     }
 
     @Override
@@ -143,7 +115,7 @@ public class ReportServiceImpl implements ReportService {
         if (reportsList.isEmpty()) {
             throw new NullPointerException("List of result is empty");
         }
-        logger.info("Get list of unchecked reports");
+        log.info("Get list of unchecked reports");
         return reportsList;
     }
 
@@ -157,17 +129,14 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Report setMarkOnReport(Long id, String result) {
         Report report = findReport(id);
-        if (report == null) {
-            logger.warn("Report with ID {} was not found", id);
-            throw new NotFoundException("Report was not found");
-        }
+
         if (result.isEmpty()) {
-            logger.warn("Result us empty");
+            log.warn("Result us empty");
             throw new NullPointerException("Result us empty");
         }
         report.setResult(result);
         report.setReportChecked(true);
-        logger.info("Mark was set on report " + id);
+        log.info("Mark was set on report " + id);
         reportRepository.save(report);
         return report;
     }

@@ -14,6 +14,7 @@ import pro.sky.animal_shelter_telegram_bot.service.PetOwnerService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Service for working with repository PetOwnerRepository
@@ -41,11 +42,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public PetOwner deletePetOwner(Long id) {
-        if (petOwnerRepository.findById(id).isEmpty()) {
-            logger.info("Pet owner with id {} is not found", id);
-            return null;
-        }
-        PetOwner deletePetOwner = petOwnerRepository.findById(id).get();
+        PetOwner deletePetOwner = petOwnerRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet owner with id = %d is not found", id)));
         petOwnerRepository.deleteById(id);
         logger.info("Pet owner with id {} is deleted", id);
         return deletePetOwner;
@@ -53,11 +51,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public PetOwner findPetOwner(Long id) {
-        if (petOwnerRepository.findById(id).isEmpty()) {
-            logger.info("Pet owner with id {} is not found", id);
-            return null;
-        }
-        PetOwner petOwner = petOwnerRepository.findById(id).get();
+        PetOwner petOwner = petOwnerRepository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Pet owner with id = %d is not found", id)));
         logger.info("Pet owner with id {} is found", id);
         return petOwner;
     }
@@ -66,7 +61,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     public PetOwner changePetOwner(PetOwner petOwner) {
         if (petOwnerRepository.findById(petOwner.getId()).isEmpty()) {
             logger.info("Pet owner with id {} is not found", petOwner.getId());
-            return null;
+            throw new NotFoundException(String.format("Pet owner with id = %d is not found", petOwner.getId()));
         }
         PetOwner changingPetOwner = petOwnerRepository.save(petOwner);
         logger.info("Pet owner with id {} is saved", petOwner);
@@ -87,7 +82,6 @@ public class PetOwnerServiceImpl implements PetOwnerService {
             logger.info("Phone number is empty");
             throw new NullPointerException("Phone number is empty");
         }
-
         PetOwner petOwner = petOwnerRepository.findPetOwnerByChatId(chatId).orElse(new PetOwner());
         petOwner.setChatId(chatId);
         petOwner.setPhoneNumber(newPhoneNumber);
@@ -152,19 +146,21 @@ public class PetOwnerServiceImpl implements PetOwnerService {
      */
     @Override
     public boolean petOwnerHasPhoneNumber(Long chatId) {
-        PetOwner petOwner = petOwnerRepository.findPetOwnerByChatId(chatId).orElse(new PetOwner());
-        if (petOwner.getPhoneNumber() != null) return true;
-        return false;
+        PetOwner petOwner = petOwnerRepository.findPetOwnerByChatId(chatId).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet owner with chat id = %d is not found", chatId)));
+        return petOwner.getPhoneNumber() != null;
     }
 
     /**
-     * @param id - chat id from telegram
+     * @param chatId - chat id from telegram
      * @return Pet owner or new Pet owner
      */
     @Override
-    public PetOwner findPetOwnerByChatId(Long id) {
-        PetOwner findingPetOwner = petOwnerRepository.findPetOwnerByChatId(id).orElse(new PetOwner());
-        logger.info("Pet owner with chat id {} is found", id);
+    public PetOwner findPetOwnerByChatId(Long chatId) {
+        PetOwner findingPetOwner = petOwnerRepository.findPetOwnerByChatId(chatId).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet owner with chat id = %d is not found", chatId)));
+
+        logger.info("Pet owner with chat id {} is found", chatId);
         return findingPetOwner;
     }
 
@@ -176,11 +172,10 @@ public class PetOwnerServiceImpl implements PetOwnerService {
      */
     @Override
     public Long getPetOwnerChatIdByPhoneNumber(String phoneNumber) {
-        PetOwner petOwner = petOwnerRepository.findPetOwnerByPhoneNumber(phoneNumber).get();
-        if (petOwner.getChatId() != null) {
-            return petOwner.getChatId();
-        }
-        throw new NullPointerException("Pet Owner does not exist");
+        PetOwner petOwner = petOwnerRepository.findPetOwnerByPhoneNumber(phoneNumber).orElseThrow(() ->
+                new NoSuchElementException(String.format("Pet owner with phone number phoneNumber = %s is not found", phoneNumber)));
+        return petOwner.getChatId();
+
     }
 
     /**
@@ -205,11 +200,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public String sayThatProbationIsOverSuccessfully(Long id) {
-        PetOwner petOwner = petOwnerRepository.findById(id).orElse(new PetOwner());
-        if (petOwner.getId() == null) {
-            logger.warn("Pet owner with id {} was not found", id);
-            throw new NotFoundException("Pet owner was not found");
-        }
+        PetOwner petOwner = petOwnerRepository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Pet owner with id = %d is not found", id)));
         Long chatId = petOwner.getChatId();
         String message = "Поздравляем! Ваш испытательный срок прошел успешно!";
         sendMessage(chatId, message);
@@ -220,11 +212,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public String sayThatProbationIsOverNotSuccessfully(Long id) {
-        PetOwner petOwner = petOwnerRepository.findById(id).orElse(new PetOwner());
-        if (petOwner.getId() == null) {
-            logger.warn("Pet owner with id {} was not found", id);
-            throw new NotFoundException("Pet owner was not found");
-        }
+        PetOwner petOwner = petOwnerRepository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Pet owner with id = %d is not found", id)));
         Long chatId = petOwner.getChatId();
         String message = "Вы не прошли испытательный срок. С вами свяжется волонтер и объяснит, как действовать дальше";
         sendMessage(chatId, message);

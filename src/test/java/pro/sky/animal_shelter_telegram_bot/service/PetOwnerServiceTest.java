@@ -133,7 +133,7 @@ public class PetOwnerServiceTest {
 
     @Test
     public void testSayThatProbationIsOverSuccessfully() {
-        when(petOwnerRepository.findById(ID)).thenReturn(Optional.of(new PetOwner()));
+        when(petOwnerRepository.findById(ID)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundException.class, () -> out.sayThatProbationIsOverSuccessfully(ID));
 
@@ -141,7 +141,7 @@ public class PetOwnerServiceTest {
 
     @Test
     public void testSayThatProbationIsOverNotSuccessfully() {
-        when(petOwnerRepository.findById(ID)).thenReturn(Optional.of(new PetOwner()));
+        when(petOwnerRepository.findById(ID)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundException.class, () -> out.sayThatProbationIsOverNotSuccessfully(ID));
     }

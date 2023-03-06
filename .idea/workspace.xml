@@ -4,8 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c372aedf-8a59-4bde-b1cc-193faa7e50ea" name="Changes" comment="Update PhotoOfPetControllerTest">
-      <change beforePath="$PROJECT_DIR$/src/test/java/pro/sky/animal_shelter_telegram_bot/controller/PhotoOfPetControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pro/sky/animal_shelter_telegram_bot/controller/PhotoOfPetControllerTest.java" afterDir="false" />
+    <list default="true" id="c372aedf-8a59-4bde-b1cc-193faa7e50ea" name="Changes" comment="update petOwner service and controller (using optionals)">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_annotations_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_core_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_models_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_liquibase_liquibase_core_4_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_webjars_locator_core_0_50.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_06_2022_19_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_06_2022_19_19__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_06_2022_11_29__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_06_2022_11_29__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shelter_telegram_bot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/PetOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/PetOwner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/Volunteer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/Volunteer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/pets/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/pets/Pet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/pets/PhotoOfPet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pro/sky/animal_shelter_telegram_bot/model/pets/PhotoOfPet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/liquibase/scripts/migrations.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/liquibase/scripts/migrations.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +42,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -57,7 +84,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -79,23 +106,33 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "C:/Users/Serge/IdeaProjects/HWSchoolHogwards1",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "20064124ef03306e8aff9b2fbdc08871"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Serge/IdeaProjects/HWSchoolHogwards1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;86e3b0f1591f58feb85ea1dede67b589&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -107,7 +144,7 @@
       <recent name="pro.sky.animal_shelter_telegram_bot.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PhotoOfPetControllerTest">
+  <component name="RunManager" selected="JUnit.AnimalShelterTelegramBotApplicationTests">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -122,6 +159,21 @@
       <data-source id="2ad68875-e643-462a-b659-196447ffe966" />
       <method v="2" />
     </configuration>
+    <configuration name="AnimalShelterTelegramBotApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="animal_shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.AnimalShelterTelegramBotApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainControllerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="animal_shelter_telegram_bot" />
       <extension name="coverage">
@@ -135,6 +187,21 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=InJavaVeritas" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetControllerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot.controller" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.controller.PetControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -186,6 +253,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PetOwnerControllerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot.controller" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.controller.PetOwnerControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PetOwnerControllerTest" type="JUnit" factoryName="JUnit">
       <module name="animal_shelter_telegram_bot" />
       <extension name="coverage">
@@ -199,6 +281,38 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=InJavaVeritas" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetOwnerServiceTest.testSayThatProbationIsOverNotSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot.service" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.service.PetOwnerServiceTest" />
+      <option name="METHOD_NAME" value="testSayThatProbationIsOverNotSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot.service" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.service.PetOwnerServiceTest" />
+      <option name="METHOD_NAME" value="testSayThatProbationIsOverSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -254,13 +368,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
+    <configuration name="AnimalShelterTelegramBotApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="shelter_telegram_bot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="pro.sky.animal_shelter_telegram_bot.AnimalShelterTelegramBotApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -284,11 +394,21 @@
       <item itemvalue="JUnit.ReportControllerTest" />
       <item itemvalue="JUnit.VolunteerControllerTest" />
       <item itemvalue="JUnit.PhotoOfPetControllerTest" />
+      <item itemvalue="JUnit.AnimalShelterTelegramBotApplicationTests" />
+      <item itemvalue="JUnit.PetControllerTest (1)" />
+      <item itemvalue="JUnit.PetOwnerControllerTest (1)" />
+      <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverNotSuccessfully" />
+      <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully" />
+      <item itemvalue="Spring Boot.AnimalShelterTelegramBotApplication (1)" />
       <item itemvalue="Spring Boot.AnimalShelterTelegramBotApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PetOwnerControllerTest" />
+        <item itemvalue="JUnit.AnimalShelterTelegramBotApplicationTests" />
+        <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully" />
+        <item itemvalue="JUnit.PetControllerTest (1)" />
+        <item itemvalue="JUnit.PetOwnerControllerTest (1)" />
+        <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverNotSuccessfully" />
       </list>
     </recent_temporary>
   </component>
@@ -319,6 +439,23 @@
       <workItem from="1657959142078" duration="9357000" />
       <workItem from="1658226719433" duration="1217000" />
       <workItem from="1658467750833" duration="13731000" />
+      <workItem from="1661620984028" duration="3130000" />
+      <workItem from="1661686224064" duration="213000" />
+      <workItem from="1661932084125" duration="592000" />
+      <workItem from="1661959656367" duration="6000" />
+      <workItem from="1671371729119" duration="1527000" />
+      <workItem from="1671423627177" duration="9000" />
+      <workItem from="1671556861165" duration="879000" />
+      <workItem from="1674663718829" duration="2255000" />
+      <workItem from="1674724638989" duration="1106000" />
+      <workItem from="1674736979786" duration="1194000" />
+      <workItem from="1674749958281" duration="2537000" />
+      <workItem from="1674802442062" duration="1263000" />
+      <workItem from="1676114594598" duration="1007000" />
+      <workItem from="1676115793280" duration="6634000" />
+      <workItem from="1676179211142" duration="810000" />
+      <workItem from="1677512667858" duration="1713000" />
+      <workItem from="1678015626343" duration="1878000" />
     </task>
     <task id="LOCAL-00001" summary="Модели классов. Создал модели классов, пришлось создать дополнительный класс которго не было в плане PhotoOfPet. Создал абстрактный класс Pet и от него два класса Dog и Cat, но пока у них один и тот же функционал видимо.">
       <created>1655931677499</created>
@@ -628,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658930396222</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="update petOwner service and controller (using optionals)">
+      <created>1678017475320</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1678017475320</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,7 +802,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update PetController.java" />
     <MESSAGE value="Update PetOwnerController and PetController" />
     <MESSAGE value="Update ReportController.java" />
     <MESSAGE value="Started writing tests for Controllers:&#10;MainController and PetController" />
@@ -683,7 +826,8 @@
     <MESSAGE value="Refactor PetOwnerController, finish write test PetOwnerControllerTest" />
     <MESSAGE value="Refactor Tests for controllers and Create PhotoOfPetControllerTest" />
     <MESSAGE value="Update PhotoOfPetControllerTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update PhotoOfPetControllerTest" />
+    <MESSAGE value="update petOwner service and controller (using optionals)" />
+    <option name="LAST_COMMIT_MESSAGE" value="update petOwner service and controller (using optionals)" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
