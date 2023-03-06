@@ -27,10 +27,6 @@ public class ReportServiceTest {
 
     @Mock
     private ReportRepository reportRepositoryMock;
-    @Mock
-    private PetOwnerRepository petOwnerRepositoryMock;
-    @Mock
-    private PetRepository petRepositoryMock;
 
     @InjectMocks
     private ReportServiceImpl out;
@@ -75,7 +71,6 @@ public class ReportServiceTest {
         REPORT_1.setDateOfReport(DATE);
 
         when(reportRepositoryMock.findReportByDateOfReportAndPetOwner_ChatId(DATE, CHAT_ID)).thenReturn(Optional.of(REPORT_1));
-        when(petOwnerRepositoryMock.findPetOwnerByChatId(CHAT_ID)).thenReturn(Optional.of(PET_OWNER_2));
 
         Report expectedReport = REPORT_1;
         expectedReport.setDateOfReport(DATE);
@@ -97,7 +92,6 @@ public class ReportServiceTest {
         REPORT_1.setDateOfReport(DATE);
 
         when(reportRepositoryMock.findReportByDateOfReportAndPetOwner_ChatId(DATE, CHAT_ID)).thenReturn(Optional.of(REPORT_1));
-        when(petOwnerRepositoryMock.findPetOwnerByChatId(CHAT_ID)).thenReturn(Optional.of(PET_OWNER_1));
 
         String health = "Здоровье";
         String diet = "Диета";
