@@ -144,7 +144,7 @@
       <recent name="pro.sky.animal_shelter_telegram_bot.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully">
+  <component name="RunManager" selected="JUnit.AnimalShelterTelegramBotApplicationTests">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -158,6 +158,21 @@
       <script-mode>FILE</script-mode>
       <data-source id="2ad68875-e643-462a-b659-196447ffe966" />
       <method v="2" />
+    </configuration>
+    <configuration name="AnimalShelterTelegramBotApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="animal_shelter_telegram_bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot" />
+      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.AnimalShelterTelegramBotApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="MainControllerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="animal_shelter_telegram_bot" />
@@ -266,21 +281,6 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=InJavaVeritas" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PetOwnerServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shelter_telegram_bot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pro.sky.animal_shelter_telegram_bot.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pro.sky.animal_shelter_telegram_bot.service" />
-      <option name="MAIN_CLASS_NAME" value="pro.sky.animal_shelter_telegram_bot.service.PetOwnerServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -394,9 +394,9 @@
       <item itemvalue="JUnit.ReportControllerTest" />
       <item itemvalue="JUnit.VolunteerControllerTest" />
       <item itemvalue="JUnit.PhotoOfPetControllerTest" />
+      <item itemvalue="JUnit.AnimalShelterTelegramBotApplicationTests" />
       <item itemvalue="JUnit.PetControllerTest (1)" />
       <item itemvalue="JUnit.PetOwnerControllerTest (1)" />
-      <item itemvalue="JUnit.PetOwnerServiceTest" />
       <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverNotSuccessfully" />
       <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully" />
       <item itemvalue="Spring Boot.AnimalShelterTelegramBotApplication (1)" />
@@ -404,11 +404,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AnimalShelterTelegramBotApplicationTests" />
         <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverSuccessfully" />
         <item itemvalue="JUnit.PetControllerTest (1)" />
         <item itemvalue="JUnit.PetOwnerControllerTest (1)" />
         <item itemvalue="JUnit.PetOwnerServiceTest.testSayThatProbationIsOverNotSuccessfully" />
-        <item itemvalue="JUnit.PetOwnerServiceTest" />
       </list>
     </recent_temporary>
   </component>
