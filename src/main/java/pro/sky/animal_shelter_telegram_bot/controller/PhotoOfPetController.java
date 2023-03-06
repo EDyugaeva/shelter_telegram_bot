@@ -4,10 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +17,10 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/report")
+@Slf4j
 public class PhotoOfPetController {
 
     private final PhotoOfPetService photoOfPetService;
-    Logger logger = LoggerFactory.getLogger(PhotoOfPetService.class);
 
     public PhotoOfPetController(PhotoOfPetService photoOfPetService) {
         this.photoOfPetService = photoOfPetService;
@@ -48,15 +46,12 @@ public class PhotoOfPetController {
             tags = "Reports"
     )
     @GetMapping(value = "/{id}/photo")
-    public ResponseEntity<byte[]> findPhotoByReportId(@PathVariable Long id) {
-        logger.info("Call findPhotoByReportId in PhotoOfPetController");
+    public byte[] findPhotoByReportId(@PathVariable Long id) {
+        log.info("Call findPhotoByReportId in PhotoOfPetController");
         PhotoOfPet photoOfPet = photoOfPetService.findPhotoByReportId(id);
-        if (photoOfPet.getFileSize() == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentLength(photoOfPet.getData().length);
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(photoOfPet.getData());
+        return photoOfPet.getData();
     }
 
     @Operation(
@@ -93,14 +88,14 @@ public class PhotoOfPetController {
             tags = "Reports"
     )
     @PostMapping(value = "/{id}/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> upLoadPhotoOfPet(@PathVariable Long id,
+    public void upLoadPhotoOfPet(@PathVariable Long id,
                                                    @RequestParam("photo") MultipartFile photo) throws IOException {
-        logger.info("Call upLoadPhotoOfPet in PhotoOfPetController");
+        log.info("Call upLoadPhotoOfPet in PhotoOfPetController");
         if (photo.getSize() > 1024 * 300) {
-            logger.warn("Warning: photo is to big");
-            return ResponseEntity.badRequest().body("File is to big");
+            log.warn("Warning: photo is to big");
         }
         photoOfPetService.uploadPhotoOfPet(id, photo);
-        return ResponseEntity.ok().build();
+        log.info("Photo is uploaded");
+
     }
 }

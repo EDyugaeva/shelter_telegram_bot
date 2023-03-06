@@ -6,9 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +19,11 @@ import static pro.sky.animal_shelter_telegram_bot.controller.ConstantsOfControll
 
 @RestController
 @RequestMapping("volunteer")
+@Slf4j
 public class VolunteerController {
 
     private final VolunteerService volunteerService;
 
-    Logger logger = LoggerFactory.getLogger(VolunteerController.class);
 
     public VolunteerController(VolunteerService volunteerService) {
         this.volunteerService = volunteerService;
@@ -45,7 +43,7 @@ public class VolunteerController {
     )
     @GetMapping
     public String helloMessage() {
-        logger.info("Call helloMessage in VolunteerController");
+        log.info("Call helloMessage in VolunteerController");
         return HELLO_MESSAGE_VOLUNTEER_CONTROLLER;
     }
 
@@ -71,13 +69,9 @@ public class VolunteerController {
             tags = "Volunteers"
     )
     @GetMapping("{id}")
-    public ResponseEntity<Volunteer> findVolunteer(@Parameter(description = "Volunteer id", example = "1") @PathVariable Long id) {
-        logger.info("Call findVolunteer in VolunteerController");
-        Volunteer volunteer = volunteerService.findVolunteer(id);
-        if (volunteer == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(volunteer);
+    public Volunteer findVolunteer(@Parameter(description = "Volunteer id", example = "1") @PathVariable Long id) {
+        log.info("Call findVolunteer in VolunteerController");
+        return volunteerService.findVolunteer(id);
     }
 
     @Operation(
@@ -101,7 +95,7 @@ public class VolunteerController {
     )
     @PostMapping
     public Volunteer addVolunteer(@RequestBody Volunteer volunteer) {
-        logger.info("Call addVolunteer in VolunteerController");
+        log.info("Call addVolunteer in VolunteerController");
         return volunteerService.addVolunteer(volunteer);
     }
 
@@ -133,13 +127,9 @@ public class VolunteerController {
             tags = "Volunteers"
     )
     @PutMapping
-    public ResponseEntity<Volunteer> editVolunteer(@RequestBody Volunteer volunteer) {
-        logger.info("Call editVolunteer in VolunteerController");
-        Volunteer editVolunteer = volunteerService.changeVolunteer(volunteer);
-        if (editVolunteer == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(volunteer);
+    public Volunteer editVolunteer(@RequestBody Volunteer volunteer) {
+        log.info("Call editVolunteer in VolunteerController");
+        return volunteerService.changeVolunteer(volunteer);
     }
 
     @Operation(
@@ -165,12 +155,9 @@ public class VolunteerController {
             tags = "Volunteers"
     )
     @DeleteMapping("{id}")
-    public ResponseEntity<Volunteer> deleteVolunteer(@PathVariable Long id) {
-        logger.info("Call deleteVolunteer in VolunteerController");
-        if (volunteerService.deleteVolunteer(id) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(volunteerService.deleteVolunteer(id));
+    public Volunteer deleteVolunteer(@PathVariable Long id) {
+        log.info("Call deleteVolunteer in VolunteerController");
+        return volunteerService.deleteVolunteer(id);
     }
 
     @Operation(
@@ -188,9 +175,9 @@ public class VolunteerController {
             tags = "Volunteers"
     )
     @GetMapping(path = "/all")
-    public ResponseEntity<Collection<Volunteer>> findAllVolunteers() {
-        logger.info("Call findAllVolunteers in VolunteerController");
-        return ResponseEntity.ok(volunteerService.findAllVolunteers());
+    public Collection<Volunteer> findAllVolunteers() {
+        log.info("Call findAllVolunteers in VolunteerController");
+        return volunteerService.findAllVolunteers();
     }
 
     @Operation(
@@ -215,16 +202,16 @@ public class VolunteerController {
             tags = "Volunteers"
     )
     @PutMapping(path = "{id}/phone-number")
-    public ResponseEntity<Volunteer> editPhoneNumberOfVolunteer(
+    public Volunteer editPhoneNumberOfVolunteer(
             @PathVariable Long id,
             @Parameter(description = "Phone number", example = "+79554478895") @RequestParam("phone") String phoneNumber) {
-        logger.info("Call editPhoneNumberOfVolunteer in VolunteerController");
-        if (id == null || phoneNumber == null || volunteerService.findVolunteer(id) == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+        log.info("Call editPhoneNumberOfVolunteer in VolunteerController");
+//        if (id == null || phoneNumber == null || volunteerService.findVolunteer(id) == null) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//        }
 
         Volunteer editVolunteer = volunteerService.findVolunteer(id);
         volunteerService.setPhoneNumberOfVolunteer(editVolunteer, phoneNumber);
-        return ResponseEntity.ok(volunteerService.changeVolunteer(editVolunteer));
+        return volunteerService.changeVolunteer(editVolunteer);
     }
 }

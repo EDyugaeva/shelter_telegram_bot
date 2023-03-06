@@ -1,9 +1,9 @@
 package pro.sky.animal_shelter_telegram_bot.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.webjars.NotFoundException;
 import pro.sky.animal_shelter_telegram_bot.model.ErrorResponse;
@@ -11,7 +11,7 @@ import pro.sky.animal_shelter_telegram_bot.model.ErrorResponse;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
@@ -46,7 +46,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     public ErrorResponse handleNoSuchElementException(NoSuchElementException noSuchElementException) {
         return ErrorResponse.builder()
                 .message(noSuchElementException.getMessage())
-                .httpStatus(HttpStatus.NOT_FOUND)
                 .build();
     }
 

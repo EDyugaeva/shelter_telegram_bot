@@ -98,7 +98,6 @@ public class ReportServiceTest {
 
         when(reportRepositoryMock.findReportByDateOfReportAndPetOwner_ChatId(DATE, CHAT_ID)).thenReturn(Optional.of(REPORT_1));
         when(petOwnerRepositoryMock.findPetOwnerByChatId(CHAT_ID)).thenReturn(Optional.of(PET_OWNER_1));
-        when(petRepositoryMock.findPetByOwnerOfPet_Id(ID)).thenReturn(petCollection);
 
         String health = "Здоровье";
         String diet = "Диета";
